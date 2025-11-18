@@ -116,4 +116,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For questions or support, please contact the development team.
+For questions or support,
+Email - sureshparmar.dev@gmail.com,
+Phone no - 9879929741.
