@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Contact - Smart Start Academy
+{% endblock title %}
+
+{% block body %}
+<div class="container fade-in">
+  <div class="row">
+    <div class="col-12 text-center mb-5">
+      <h1 class="display-4 fw-bold mb-4">Contact Us</h1>
+      <p class="lead text-muted">Get in touch with our team for support and inquiries</p>
+    </div>
+  </div>
+
+  <div class="row g-5">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title mb-0"><i class="bi bi-envelope"></i> Send us a Message</h3>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Enter your full name">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter your email">
+            </div>
+            <div class="mb-3">
+              <label for="subject" class="form-label">Subject</label>
+              <input type="text" class="form-control" id="subject" placeholder="Enter subject">
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" rows="5" placeholder="Enter your message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-send"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3 class="card-title mb-0"><i class="bi bi-geo-alt"></i> Our Office</h3>
+        </div>
+        <div class="card-body">
+          <p class="mb-2"><strong>Smart Start Academy</strong></p>
+          <p class="mb-1">123 Education Street</p>
+          <p class="mb-1">Knowledge City, KC 12345</p>
+          <p class="mb-0">India</p>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3 class="card-title mb-0"><i class="bi bi-telephone"></i> Contact Information</h3>
+        </div>
+        <div class="card-body">
+          <p class="mb-2"><i class="bi bi-telephone me-2"></i> <strong>Phone:</strong> +91 12345 67890</p>
+          <p class="mb-2"><i class="bi bi-envelope me-2"></i> <strong>Email:</strong> support@smartstartacademy.com</p>
+          <p class="mb-0"><i class="bi bi-clock me-2"></i> <strong>Hours:</strong> Mon-Fri 9:00 AM - 6:00 PM</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title mb-0"><i class="bi bi-chat-dots"></i> Quick Support</h3>
+        </div>
+        <div class="card-body">
+          <p class="mb-3">Need immediate assistance? Our support team is here to help.</p>
+          <button class="btn btn-success me-2">
+            <i class="bi bi-chat-dots"></i> Live Chat
+          </button>
+          <button class="btn btn-outline-primary">
+            <i class="bi bi-question-circle"></i> FAQ
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

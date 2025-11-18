@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Info - Smart Start Academy
+{% endblock title %}
+
+{% block body %}
+<div class="container fade-in">
+  <div class="row">
+    <div class="col-12 text-center mb-5">
+      <h1 class="display-4 fw-bold mb-4">Information Center</h1>
+      <p class="lead text-muted">Everything you need to know about Smart Start Academy</p>
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="accordion" id="infoAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#getting-started" aria-expanded="true" aria-controls="getting-started">
+              <i class="bi bi-rocket-takeoff me-2"></i> Getting Started
+            </button>
+          </h2>
+          <div id="getting-started" class="accordion-collapse collapse show" data-bs-parent="#infoAccordion">
+            <div class="accordion-body">
+              <p>Welcome to Smart Start Academy! Getting started is easy:</p>
+              <ol>
+                <li>Create your school account</li>
+                <li>Set up your profile and school information</li>
+                <li>Add your standards and subjects</li>
+                <li>Start adding students and teachers</li>
+                <li>Begin managing your school digitally</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#features" aria-expanded="false" aria-controls="features">
+              <i class="bi bi-star me-2"></i> Key Features
+            </button>
+          </h2>
+          <div id="features" class="accordion-collapse collapse" data-bs-parent="#infoAccordion">
+            <div class="accordion-body">
+              <ul>
+                <li><strong>Student Management:</strong> Complete student profiles with academic records</li>
+                <li><strong>Teacher Management:</strong> Track teacher information and assignments</li>
+                <li><strong>Academic Structure:</strong> Manage standards, subjects, and curriculum</li>
+                <li><strong>Dashboard Analytics:</strong> Real-time insights into school performance</li>
+                <li><strong>Paperless Operations:</strong> Reduce paperwork by up to 90%</li>
+                <li><strong>Secure & Reliable:</strong> Enterprise-grade security and 99.9% uptime</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pricing" aria-expanded="false" aria-controls="pricing">
+              <i class="bi bi-cash me-2"></i> Pricing & Plans
+            </button>
+          </h2>
+          <div id="pricing" class="accordion-collapse collapse" data-bs-parent="#infoAccordion">
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100">
+                    <div class="card-header text-center">
+                      <h5 class="card-title mb-0">Basic</h5>
+                    </div>
+                    <div class="card-body text-center">
+                      <h3 class="text-primary">$9/month</h3>
+                      <p>Up to 500 students</p>
+                      <ul class="list-unstyled">
+                        <li>✓ Student Management</li>
+                        <li>✓ Basic Reports</li>
+                        <li>✓ Email Support</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100 border-primary">
+                    <div class="card-header text-center bg-primary text-white">
+                      <h5 class="card-title mb-0">Professional</h5>
+                    </div>
+                    <div class="card-body text-center">
+                      <h3 class="text-primary">$29/month</h3>
+                      <p>Up to 2000 students</p>
+                      <ul class="list-unstyled">
+                        <li>✓ All Basic Features</li>
+                        <li>✓ Advanced Analytics</li>
+                        <li>✓ Priority Support</li>
+                        <li>✓ Custom Reports</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100">
+                    <div class="card-header text-center">
+                      <h5 class="card-title mb-0">Enterprise</h5>
+                    </div>
+                    <div class="card-body text-center">
+                      <h3 class="text-primary">Contact Us</h3>
+                      <p>Unlimited students</p>
+                      <ul class="list-unstyled">
+                        <li>✓ All Professional Features</li>
+                        <li>✓ White-label Solution</li>
+                        <li>✓ 24/7 Phone Support</li>
+                        <li>✓ Custom Integration</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#support" aria-expanded="false" aria-controls="support">
+              <i class="bi bi-headset me-2"></i> Support & Help
+            </button>
+          </h2>
+          <div id="support" class="accordion-collapse collapse" data-bs-parent="#infoAccordion">
+            <div class="accordion-body">
+              <p>We're here to help you succeed with Smart Start Academy:</p>
+              <ul>
+                <li><strong>Documentation:</strong> Comprehensive guides and tutorials</li>
+                <li><strong>Video Tutorials:</strong> Step-by-step video walkthroughs</li>
+                <li><strong>Community Forum:</strong> Connect with other school administrators</li>
+                <li><strong>Live Chat:</strong> Get instant help from our support team</li>
+                <li><strong>Email Support:</strong> support@smartstartacademy.com</li>
+                <li><strong>Phone Support:</strong> Available for Professional and Enterprise plans</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#security" aria-expanded="false" aria-controls="security">
+              <i class="bi bi-shield-check me-2"></i> Security & Privacy
+            </button>
+          </h2>
+          <div id="security" class="accordion-collapse collapse" data-bs-parent="#infoAccordion">
+            <div class="accordion-body">
+              <p>Your data security is our top priority:</p>
+              <ul>
+                <li><strong>Encryption:</strong> All data encrypted in transit and at rest</li>
+                <li><strong>Compliance:</strong> GDPR and local data protection regulations</li>
+                <li><strong>Backups:</strong> Daily automated backups with disaster recovery</li>
+                <li><strong>Access Control:</strong> Role-based permissions and multi-factor authentication</li>
+                <li><strong>Auditing:</strong> Complete audit trails for all data changes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 text-center">
+      <div class="card">
+        <div class="card-body py-5">
+          <h3 class="h1 fw-bold mb-4">Ready to Get Started?</h3>
+          <p class="lead mb-4">Join thousands of schools already using Smart Start Academy</p>
+          <a href="{% url 'register' %}" class="btn btn-primary btn-lg px-5 me-3">
+            <i class="bi bi-person-add"></i> Sign Up Free
+          </a>
+          <a href="{% url 'contact' %}" class="btn btn-outline-primary btn-lg px-5">
+            <i class="bi bi-envelope"></i> Contact Sales
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}
