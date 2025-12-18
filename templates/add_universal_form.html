@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block title %}{{ form_title }} - Smart Start Academy{% endblock %}
+
+{% block content %}
+
+<div class="add-wrapper">
+
+    <div class="crm-card">
+
+        <div class="crm-card-header">
+            <i class="{{ form_icon }}"></i>
+            {{ form_title }}
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="mb-3">
+                    <label class="form-label">{{ field.label }}</label>
+
+                    {% if field.name in date_fields %}
+                        {{ field|add_class:"crm-date" }}
+                    {% else %}
+                        {{ field|add_class:"crm-input" }}
+                    {% endif %}
+
+                    {% if field.errors %}
+                        <div class="field-error">{{ field.errors|striptags }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="submit-btn">
+                <i class="{{ submit_icon }}"></i> {{ submit_text }}
+            </button>
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

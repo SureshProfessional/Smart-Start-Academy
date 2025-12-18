@@ -42,7 +42,7 @@ class CustomUser(AbstractUser):
 class School(models.Model):
     user = models.OneToOneField(CustomUser,on_delete=models.CASCADE)
     school_name = models.CharField(max_length=100)
-    school_code = models.CharField(max_length=20,unique=True)
+    school_code = models.CharField(max_length=20,null=True,blank=True,unique=True)
     established_year = models.PositiveIntegerField(blank=True,null=True)    
     contact_number = models.CharField(max_length=15,null=True,blank=True)
     website = models.URLField(blank=True,null=True)

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-%uj*kinup$*v-&xgo$kl$_&ll^!@bhj66+-77p+_(6z&vr*wq@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     
     'rest_framework',
     'main_app',
+    
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +136,26 @@ AUTH_USER_MODEL = "main_app.CustomUser"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'info',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
+}
+
+USE_L10N = False        # Disable auto formatting
+
+DATE_FORMAT = "d-m-Y"
+SHORT_DATE_FORMAT = "d-m-Y"
+
+DATETIME_FORMAT = "d-m-Y H:i"
+SHORT_DATETIME_FORMAT = "d-m-Y H:i"
+
+DATE_INPUT_FORMATS = [
+    "%d-%m-%Y",
+    "%d/%m/%Y",
+    "%Y-%m-%d",   # fallback
+]

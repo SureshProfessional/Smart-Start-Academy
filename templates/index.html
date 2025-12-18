@@ -1,523 +1,393 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Start Academy - Digital School Management</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #64748b;
-            --accent-color: #f59e0b;
-            --success-color: #10b981;
-            --dark-color: #1e293b;
-            --light-color: #f8fafc;
-        }
+{% extends 'base.html' %}
+{% load static %}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--dark-color);
-            overflow-x: hidden;
-        }
+{% block title %}Smart Start Academy – Digital School & Coaching Management{% endblock %}
 
-        /* Navigation */
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            padding: 1rem 0;
-        }
+{% block content %}
 
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary-color) !important;
-        }
+<!-- Hero Section -->
+<section class="hero-section" id="home">
+    <div class="container">
+        <div class="row align-items-center gy-5">
+            <div class="col-lg-6">
+                <div class="hero-copy fade-in">
+                    <span class="hero-badge">
+                        <i class="bi bi-stars me-2"></i>
+                        1-Month Free • No Credit Card
+                    </span>
+                    <h1>Run Your Entire Academy from One Modern Dashboard.</h1>
+                    <p class="hero-subtitle">
+                        Attendance, fees, results, homework, communication – everything in one place.
+                        Built for schools, tuition classes, and coaching institutes in India.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 mt-4">
+                        <a href="{% url 'register' %}" class="btn btn-primary">
+                            <i class="bi bi-rocket-takeoff-fill me-2"></i>
+                            Start Free Trial
+                        </a>
+                        <a href="#demo" class="btn btn-ghost">
+                            <i class="bi bi-play-circle me-2"></i>
+                            Watch 2-min Demo
+                        </a>
+                    </div>
+                    <div class="hero-meta mt-4">
+                        <div class="d-flex flex-wrap gap-4">
+                            <div>
+                                <div class="meta-label">Trusted by</div>
+                                <div class="meta-value">100+ Academies</div>
+                            </div>
+                            <div>
+                                <div class="meta-label">Paper Saved</div>
+                                <div class="meta-value">95% Reduction</div>
+                            </div>
+                            <div>
+                                <div class="meta-label">Support</div>
+                                <div class="meta-value">WhatsApp + Call</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        .nav-link {
-            font-weight: 500;
-            color: var(--dark-color) !important;
-            transition: color 0.3s ease;
-        }
+            <div class="col-lg-6">
+                <div class="hero-visual fade-in">
+                    <div class="hero-card glass-card">
+                        <div class="hero-card-header d-flex justify-content-between align-items-center">
+                            <span>Today at a Glance</span>
+                            <span class="badge bg-success-subtle text-success">
+                                <i class="bi bi-check-circle me-1"></i> On Track
+                            </span>
+                        </div>
+                        <div class="hero-card-body">
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="mini-stat">
+                                        <div class="mini-label">Present Students</div>
+                                        <div class="mini-value">428</div>
+                                        <div class="mini-chip chip-success">+12 vs yesterday</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mini-stat">
+                                        <div class="mini-label">Fees Collected (Today)</div>
+                                        <div class="mini-value">₹84,250</div>
+                                        <div class="mini-chip chip-info">Auto reconciled</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mini-stat">
+                                        <div class="mini-label">Pending Homework</div>
+                                        <div class="mini-value">36</div>
+                                        <div class="mini-chip chip-warning">Teacher alert</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mini-stat">
+                                        <div class="mini-label">Parent Messages</div>
+                                        <div class="mini-value">19</div>
+                                        <div class="mini-chip chip-muted">All replied</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hero-card-footer">
+                            <span><i class="bi bi-shield-lock me-1"></i>Secure cloud backup</span>
+                            <span><i class="bi bi-cloud-arrow-up me-1"></i>Auto sync</span>
+                        </div>
+                    </div>
 
-        .nav-link:hover {
-            color: var(--primary-color) !important;
-        }
+                    <div class="floating-badge">
+                        <i class="bi bi-tree-fill me-2"></i>
+                        Save up to 50,000+ pages of paper every year
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
+<!-- Features -->
+<section class="section" id="features">
+    <div class="container">
+        <div class="section-heading text-center">
+            <h2>Everything Your Academy Needs. Nothing You Don’t.</h2>
+            <p class="section-subtitle">
+                Replace 5 different registers and 10 Excel files with one clean, simple system.
+            </p>
+        </div>
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.1;
-        }
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="bi bi-clipboard-check"></i>
+                    </div>
+                    <h3>Smart Attendance</h3>
+                    <p>Mark daily attendance in seconds – auto alerts for absentees on WhatsApp/SMS.</p>
+                    <ul class="feature-list">
+                        <li>Class-wise & batch-wise</li>
+                        <li>Instant parent notification</li>
+                        <li>Monthly attendance reports</li>
+                    </ul>
+                </div>
+            </div>
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            color: white;
-        }
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="bi bi-currency-rupee"></i>
+                    </div>
+                    <h3>Fees Automation</h3>
+                    <p>Track fees, dues, receipts, and instalments without touching a calculator.</p>
+                    <ul class="feature-list">
+                        <li>Smart fee plans</li>
+                        <li>Auto due reminders</li>
+                        <li>Export to Excel</li>
+                    </ul>
+                </div>
+            </div>
 
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="bi bi-kanban"></i>
+                    </div>
+                    <h3>Results & Reports</h3>
+                    <p>Generate mark-sheets and performance reports in a few clicks.</p>
+                    <ul class="feature-list">
+                        <li>Custom exam templates</li>
+                        <li>Downloadable PDFs</li>
+                        <li>Progress tracking</li>
+                    </ul>
+                </div>
+            </div>
 
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="bi bi-chat-dots"></i>
+                    </div>
+                    <h3>Parent App</h3>
+                    <p>One place for attendance, homework, results, and announcements.</p>
+                    <ul class="feature-list">
+                        <li>Daily updates</li>
+                        <li>Multi-student view</li>
+                        <li>Secure login</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        .hero .btn {
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            margin: 0 0.5rem;
-            transition: all 0.3s ease;
-        }
+<!-- Stats -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Institutes Onboarded</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">25K+</div>
+                    <div class="stat-label">Students Managed</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Paper Reduction</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Cloud Uptime</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        .hero .btn-primary {
-            background: var(--accent-color);
-            border: none;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
-        }
+<!-- How it Works -->
+<section class="section" id="demo">
+    <div class="container">
+        <div class="section-heading text-center">
+            <h2>Get Started in 3 Simple Steps</h2>
+            <p class="section-subtitle">
+                No complex setup. We onboard your data and train your staff.
+            </p>
+        </div>
 
-        .hero .btn-outline-light:hover {
-            background: white;
-            color: var(--primary-color);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 5rem 0;
-            background: var(--light-color);
-        }
-
-        .features h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--dark-color);
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 100%;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            color: white;
-            font-size: 2rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--dark-color);
-        }
-
-        /* Stats Section */
-        .stats {
-            padding: 5rem 0;
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            color: var(--accent-color);
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* CTA Section */
-        .cta {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            text-align: center;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .cta .btn {
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
-            font-weight: 600;
-            border-radius: 50px;
-            background: white;
-            color: var(--primary-color);
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .cta .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark-color);
-            color: white;
-            padding: 3rem 0 1rem;
-        }
-
-        .footer h5 {
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        .footer a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .features h2,
-            .cta h2 {
-                font-size: 2rem;
-            }
-
-            .feature-card {
-                margin-bottom: 2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="bi bi-mortarboard-fill me-2"></i>
-                Smart Start Academy
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#home">Home</a>
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-6">
+                <ol class="step-list">
+                    <li>
+                        <h4>Create Your Academy Account</h4>
+                        <p>Sign up, add your branches, and basic details. We’ll help you configure everything.</p>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#features">Features</a>
+                    <li>
+                        <h4>Import Students & Batches</h4>
+                        <p>Upload Excel sheets or let our team import your existing data safely.</p>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                    <li>
+                        <h4>Go Live with Parents</h4>
+                        <p>Share parent login/app details, start sending updates from day one.</p>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-6">
+                <div class="demo-card glass-card fade-in">
+                    <div class="demo-video-placeholder">
+                        <i class="bi bi-play-circle"></i>
+                        <p>2-minute overview demo (you can embed actual video later)</p>
+                    </div>
+                    <div class="demo-footer">
+                        <span><i class="bi bi-headset me-1"></i> Free onboarding & training</span>
+                        <span><i class="bi bi-clock-history me-1"></i> Live within 48 hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section class="section" id="pricing">
+    <div class="container">
+        <div class="section-heading text-center">
+            <h2>Simple Monthly Pricing</h2>
+            <p class="section-subtitle">
+                1-month free trial. Then choose a plan that fits your academy size.
+            </p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="pricing-card">
+                    <div class="pricing-tag">Starter</div>
+                    <h3>Up to 200 Students</h3>
+                    <p class="pricing-price">₹5,000<span>/month</span></p>
+                    <ul class="pricing-features">
+                        <li><i class="bi bi-check2"></i> Attendance & fees</li>
+                        <li><i class="bi bi-check2"></i> Result management</li>
+                        <li><i class="bi bi-check2"></i> Parent portal</li>
+                        <li><i class="bi bi-check2"></i> Email support</li>
+                    </ul>
+                    <a href="{% url 'register' %}" class="btn btn-outline-soft w-100">Start with Starter</a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="pricing-card pricing-card-featured">
+                    <div class="pricing-tag tag-popular">Most Popular</div>
+                    <h3>Growing Academy</h3>
+                    <p class="pricing-price">₹10,000<span>/month</span></p>
+                    <ul class="pricing-features">
+                        <li><i class="bi bi-check2"></i> All Starter features</li>
+                        <li><i class="bi bi-check2"></i> Multi-branch support</li>
+                        <li><i class="bi bi-check2"></i> Custom reports</li>
+                        <li><i class="bi bi-check2"></i> Priority support</li>
+                    </ul>
+                    <a href="{% url 'register' %}" class="btn btn-primary w-100">Start Free Trial</a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="pricing-card">
+                    <div class="pricing-tag">Pro</div>
+                    <h3>Large Institutes</h3>
+                    <p class="pricing-price">₹15,000<span>/month</span></p>
+                    <ul class="pricing-features">
+                        <li><i class="bi bi-check2"></i> All Growing features</li>
+                        <li><i class="bi bi-check2"></i> Custom integrations</li>
+                        <li><i class="bi bi-check2"></i> Dedicated account manager</li>
+                        <li><i class="bi bi-check2"></i> SLA-backed support</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline-soft w-100">Talk to Sales</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About & Contact -->
+<section class="section section-muted" id="about">
+    <div class="container">
+        <div class="row g-4 align-items-start">
+            <div class="col-lg-6">
+                <h2>Built for Indian Schools & Coaching Institutes.</h2>
+                <p class="section-subtitle">
+                    We understand how real academies work – fees in instalments, multiple batches,
+                    subject-wise teachers, Excel exports, and parents on WhatsApp.
+                </p>
+                <ul class="about-list">
+                    <li><i class="bi bi-check-circle"></i> Works on any device – mobile, tablet, desktop.</li>
+                    <li><i class="bi bi-check-circle"></i> Secure Indian cloud hosting with daily backups.</li>
+                    <li><i class="bi bi-check-circle"></i> Training in simple Hindi/English as per your staff.</li>
                 </ul>
-                <div class="d-flex">
-                    <a href="#register" class="btn btn-outline-primary me-2">Register</a>
-                    <a href="#login" class="btn btn-primary">Login</a>
-                </div>
             </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content fade-in">
-                <h1>Transform Your School with Digital Excellence</h1>
-                <p class="lead">Join thousands of schools going digital with Smart Start Academy. Reduce paperwork, streamline operations, and focus on what matters most - education.</p>
-                <div class="d-flex justify-content-center flex-wrap gap-3">
-                    <a href="#register" class="btn btn-primary">
-                        <i class="bi bi-rocket-takeoff me-2"></i>Start Free Trial
-                    </a>
-                    <a href="#demo" class="btn btn-outline-light">
-                        <i class="bi bi-play-circle me-2"></i>Watch Demo
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <div class="row text-center mb-5">
-                <div class="col-12">
-                    <h2>Why Choose Smart Start Academy?</h2>
-                    <p class="lead text-muted">Experience the future of education management with our comprehensive digital solutions</p>
-                </div>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card fade-in">
-                        <div class="feature-icon">
-                            <i class="bi bi-tree-fill"></i>
+            <div class="col-lg-6" id="contact">
+                <div class="contact-card">
+                    <h3>Book a Free Demo Call</h3>
+                    <p class="text-muted mb-3">
+                        Share your details – our team will call you, understand your academy, and show a live demo.
+                    </p>
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Your Name</label>
+                            <input type="text" class="crm-input" placeholder="Principal / Owner name" />
                         </div>
-                        <h3>Eco-Friendly</h3>
-                        <p>Reduce paper usage by up to 90% and contribute to environmental conservation</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card fade-in">
-                        <div class="feature-icon">
-                            <i class="bi bi-lightning-charge-fill"></i>
+                        <div class="mb-3">
+                            <label class="form-label">Academy / School Name</label>
+                            <input type="text" class="crm-input" placeholder="e.g. Smart Vision Classes" />
                         </div>
-                        <h3>Lightning Fast</h3>
-                        <p>Streamline administrative tasks and save valuable time with our intuitive interface</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card fade-in">
-                        <div class="feature-icon">
-                            <i class="bi bi-shield-check"></i>
+                        <div class="mb-3">
+                            <label class="form-label">Mobile Number</label>
+                            <input type="text" class="crm-input" placeholder="+91 -" />
                         </div>
-                        <h3>Secure & Reliable</h3>
-                        <p>Enterprise-grade security with 99.9% uptime guarantee</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="feature-card fade-in">
-                        <div class="feature-icon">
-                            <i class="bi bi-graph-up"></i>
-                        </div>
-                        <h3>Smart Analytics</h3>
-                        <p>Get valuable insights with comprehensive reporting and analytics tools</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 col-6">
-                    <div class="stat-item">
-                        <div class="stat-number">10,000+</div>
-                        <div class="stat-label">Schools</div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="stat-item">
-                        <div class="stat-number">500K+</div>
-                        <div class="stat-label">Students</div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="stat-item">
-                        <div class="stat-number">95%</div>
-                        <div class="stat-label">Paper Reduction</div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6">
-                    <div class="stat-item">
-                        <div class="stat-number">99.9%</div>
-                        <div class="stat-label">Uptime</div>
-                    </div>
+                        {% comment %} <div class="mb-3">
+                            <label class="form-label">Approx. Students</label>
+                            <select class="form-select">
+                                <option>Less than 100</option>
+                                <option>100 - 300</option>
+                                <option>300 - 600</option>
+                                <option>600+</option>
+                            </select>
+                        </div> {% endcomment %}
+                        <button type="button" class="btn btn-primary w-100">
+                            <i class="bi bi-telephone-outbound me-2"></i>
+                            Request Callback
+                        </button>
+                        <p class="form-footnote">
+                            By submitting, you agree to be contacted on WhatsApp/call for product information.
+                        </p>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2>Ready to Go Digital?</h2>
-                    <p class="lead mb-4">Join the digital revolution and transform your school management today</p>
-                    <a href="#register" class="btn">Get Started Now</a>
-                </div>
-            </div>
+<!-- Final CTA -->
+<section class="cta-section" id="register">
+    <div class="container text-center">
+        <h2>Ready to Make Your Academy 100% Digital?</h2>
+        <p>Start your 1-month free trial today. No credit card, no lock-in.</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap mt-3">
+            <a href="{% url 'register' %}" class="btn btn-primary">
+                <i class="bi bi-rocket-takeoff-fill me-2"></i>
+                Get Started in 2 Minutes
+            </a>
+            <a href="#contact" class="btn btn-ghost">
+                <i class="bi bi-headset me-2"></i>
+                Talk to Our Team
+            </a>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <h5>Smart Start Academy</h5>
-                    <p>Transforming education through innovative digital solutions. Making school management efficient, eco-friendly, and future-ready.</p>
-                    <p class="mb-0"><em>"Save the Trees, Reduce Paperwork - Go Digital with Smart Start Academy!"</em></p>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <h5>Product</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
-                        <li><a href="#demo">Demo</a></li>
-                        <li><a href="#support">Support</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <h5>Company</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#careers">Careers</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                        <li><a href="#press">Press</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <h5>Support</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#help">Help Center</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li><a href="#privacy">Privacy</a></li>
-                        <li><a href="#terms">Terms</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <h5>Connect</h5>
-                    <div class="d-flex">
-                        <a href="#" class="me-3"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="me-3"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="me-3"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <hr class="my-4">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p class="mb-0">&copy; 2024 Smart Start Academy. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Navbar background change on scroll
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
-
-        // Animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            observer.observe(el);
-        });
-    </script>
-</body>
-</html>
+{% endblock %}

@@ -1,51 +1,110 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load widget_tweaks %}
 
-{% block title %}
-Profile - Smart Start Academy
-{% endblock title %}
+{% block title %}Profile - Smart Start Academy{% endblock %}
 
-{% block body %}
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-10">
-      <div class="card shadow">
-        <div class="card-header bg-info text-white">
-          <h3 class="card-title mb-0"><i class="bi bi-person-circle"></i> Update Profile</h3>
-        </div>
-        <div class="card-body">
-          <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="row">
-              <div class="col-md-6">
-                <h5>School Information</h5>
-                {% for field in school_form %}
-                <div class="mb-3">
-                  <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                  {{ field }}
-                  {% if field.errors %}
-                  <div class="text-danger small">{{ field.errors }}</div>
-                  {% endif %}
+{% block content %}
+
+<!-- Universal messages -->
+{% include "messages.html" %}
+
+<div class="profile-section fade-in py-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+
+                <div class="profile-card glass-card p-4 p-md-5">
+
+                    <!-- Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h2 class="fw-bold mb-1">
+                                <i class="bi bi-person-circle me-2"></i>
+                                Update Profile
+                            </h2>
+                            <p class="text-muted mb-0">Update your school and personal details</p>
+                        </div>
+
+                        <div class="profile-avatar">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                    </div>
+
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="row g-4">
+
+                            <!-- School Information -->
+                            <div class="col-md-6">
+                                <h5 class="section-title mb-3">
+                                    <i class="bi bi-building-check me-2"></i> School Information
+                                </h5>
+
+                                {% for field in school_form %}
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">{{ field.label }}</label>
+
+                                        {% if field.field.widget.input_type == "file" %}
+                                            <div class="file-input-wrapper">
+                                                {{ field|add_class:"crm-input" }}
+                                            </div>
+                                        {% else %}
+                                            {{ field|add_class:"crm-input" }}
+                                        {% endif %}
+
+                                        {% if field.errors %}
+                                            <div class="text-danger small mt-1">
+                                                {{ field.errors }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <!-- User Information -->
+                            <div class="col-md-6">
+                                <h5 class="section-title mb-3">
+                                    <i class="bi bi-person-lines-fill me-2"></i> User Information
+                                </h5>
+
+                                {% for field in user_form %}
+                                    <div class="mb-3">
+
+                                        <label class="form-label fw-semibold">{{ field.label }}</label>
+
+                                        {% if field.field.widget.input_type == "password" %}
+                                            <div class="password-wrapper">
+                                                {{ field|add_class:"crm-input password-input" }}
+                                                <i class="bi bi-eye-slash password-toggle"
+                                                   data-field="{{ field.id_for_label }}"></i>
+                                            </div>
+                                        {% else %}
+                                            {{ field|add_class:"crm-input" }}
+                                        {% endif %}
+
+                                        {% if field.errors %}
+                                            <div class="text-danger small mt-1">
+                                                {{ field.errors }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold mt-4">
+                            <i class="bi bi-save me-2"></i>
+                            Save Changes
+                        </button>
+
+                    </form>
+
                 </div>
-                {% endfor %}
-              </div>
-              <div class="col-md-6">
-                <h5>User Information</h5>
-                {% for field in user_form %}
-                <div class="mb-3">
-                  <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                  {{ field }}
-                  {% if field.errors %}
-                  <div class="text-danger small">{{ field.errors }}</div>
-                  {% endif %}
-                </div>
-                {% endfor %}
-              </div>
+
             </div>
-            <button type="submit" class="btn btn-info w-100"><i class="bi bi-save"></i> Update Profile</button>
-          </form>
         </div>
-      </div>
     </div>
-  </div>
 </div>
-{% endblock body %}
+
+{% endblock %}

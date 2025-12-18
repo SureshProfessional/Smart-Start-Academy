@@ -1,0 +1,11 @@
+{% if messages %}
+<div class="container mt-3 mb-2">
+    {% for message in messages %}
+        <div class="alert universal-alert {{ message.tags }} alert-dismissible fade show" role="alert">
+            <i class="bi bi-info-circle me-2"></i>
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}

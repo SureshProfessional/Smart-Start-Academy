@@ -1,51 +1,104 @@
 {% extends 'base.html' %}
+{% block title %}All Students - Smart Start Academy{% endblock %}
+{% block content %}
 
-{% block title %}
-All Students - Smart Start Academy
-{% endblock title %}
+<style>
+</style>
 
-{% block body %}
 <div class="container mt-4">
-  <div class="row mb-4">
-    <div class="col-12">
-      <h2 class="mb-4"><i class="bi bi-people"></i> All Students</h2>
-    </div>
-  </div>
 
-  <div class="row mb-3">
-    <div class="col-12 text-end">
-      <a href="{% url 'add_student' %}" class="btn btn-primary"><i class="bi bi-plus"></i> Add New Student</a>
-    </div>
-  </div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="table-heading"><i class="bi bi-people"></i> All Students</h2>
 
-  <div class="table-responsive">
-    <table class="table table-striped table-hover">
-      <thead class="table-dark">
-        <tr>
-          <th scope="col">GR NO</th>
-          <th scope="col">Std</th>
-          <th scope="col">First Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for student in students %}
-        <tr>
-          <td>{{ student.gr_no }}</td>
-          <td>{{ student.std }}</td>
-          <td>{{ student.user.first_name }}</td>
-          <td>{{ student.user.last_name }}</td>
-          <td>{{ student.user.email }}</td>
-          <td>
-            <button class="btn btn-warning btn-sm me-2">Edit</button>
-            <button class="btn btn-danger btn-sm">Leave</button>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+        <a href="{% url 'add_student' %}" class="btn btn-primary">
+            <i class="bi bi-plus"></i> Add New Student
+        </a>
+    </div>
+
+    <div class="table-box">
+
+        <table id="studentsTable" class="display universal-table">
+
+
+<thead>
+    <tr class="main-header">
+        <th>GR NO</th>
+        <th>Std</th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr class="filters">
+        <th><input type="text" placeholder="Search GR"></th>
+        <th><input type="text" placeholder="Search Std"></th>
+        <th><input type="text" placeholder="Search First"></th>
+        <th><input type="text" placeholder="Search Last"></th>
+        <th><input type="text" placeholder="Search Email"></th>
+        <th></th>
+    </tr>
+</thead>
+
+<tbody>
+{% for student in students %}
+<tr>
+    <td>{{ student.gr_no }}</td>
+    <td><span class="badge-soft">{{ student.std }}</span></td>
+    <td>{{ student.user.first_name }}</td>
+    <td>{{ student.user.last_name }}</td>
+    <td>{{ student.user.email }}</td>
+    <td>
+        <div class="action-buttons">
+            <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
+            <button class="action-btn action-edit"><i class="bi bi-pencil"></i></button>
+            <button class="action-btn action-delete"><i class="bi bi-trash"></i></button>
+        </div>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+
+
+    </div>
+
 </div>
-{% endblock body %}
+
+
+{% block extra_js %}
+<script>
+$(document).ready(function () {
+
+    // Prevent re-init
+    if ($.fn.DataTable.isDataTable('#studentsTable')) {
+        $('#studentsTable').DataTable().destroy();
+    }
+
+    var table = $('#studentsTable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            { extend:'copy',  text:'<i class="bi bi-clipboard"></i> Copy' },
+            { extend:'excel', text:'<i class="bi bi-file-earmark-excel"></i> Excel' },
+            { extend:'csv',   text:'<i class="bi bi-filetype-csv"></i> CSV' },
+            { extend:'pdf',   text:'<i class="bi bi-filetype-pdf"></i> PDF' },
+            { extend:'print', text:'<i class="bi bi-printer"></i> Print' }
+        ],
+        orderCellsTop: true,
+        fixedHeader: true,
+        pageLength: 50
+    });
+
+    // ⭐ Column filters
+    $('#studentsTable thead tr.filters input').on('keyup change', function () {
+        let index = $(this).parent().index();
+        table.column(index).search(this.value).draw();
+    });
+
+});
+
+</script>
+{% endblock %}
+
+{% endblock %}

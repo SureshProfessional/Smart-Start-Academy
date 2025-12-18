@@ -1,330 +1,246 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Smart Start Academy{% endblock %}</title>
+
+    <!-- jQuery (must be first JS) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
+
+    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #64748b;
-            --accent-color: #f59e0b;
-            --success-color: #10b981;
-            --dark-color: #1e293b;
-            --light-color: #f8fafc;
-        }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--dark-color);
-            background: var(--light-color);
-        }
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'refactor.css' %}">
 
-        /* Navigation */
-        .navbar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            padding: 1rem 0;
-        }
-
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary-color) !important;
-        }
-
-        .nav-link {
-            font-weight: 500;
-            color: var(--dark-color) !important;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--primary-color) !important;
-        }
-
-        /* Cards */
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        }
-
-        /* Buttons */
-        .btn {
-            border-radius: 50px;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
-            border: none;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
-        }
-
-        /* Forms */
-        .form-control {
-            border-radius: 10px;
-            border: 2px solid #e2e8f0;
-            padding: 0.75rem 1rem;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        /* Tables */
-        .table {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .table thead th {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            font-weight: 600;
-            padding: 1rem;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark-color);
-            color: white;
-            padding: 3rem 0 1rem;
-            margin-top: auto;
-        }
-
-        .footer h5 {
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        .footer a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background: var(--dark-color);
-            color: white;
-            transition: left 0.3s;
-            z-index: 1000;
-            padding-top: 60px;
-        }
-
-        .sidebar.show {
-            left: 0;
-        }
-
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .sidebar li {
-            padding: 10px 20px;
-        }
-
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            display: block;
-            transition: background 0.3s;
-        }
-
-        .sidebar a:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .navbar-brand {
-                font-size: 1.2rem;
-            }
-
-            .btn {
-                padding: 0.5rem 1.5rem;
-                font-size: 0.9rem;
-            }
-        }
-    </style>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'custom.css' %}">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css"> {% block extra_css %}{% endblock %}
 </head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+
+
+
+<body class="dark">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg main-navbar">
         <div class="container">
-            <button class="btn btn-outline-secondary me-2" id="sidebarToggle">
-                <i class="bi bi-list"></i>
-            </button>
-            <a class="navbar-brand" href="{% url 'home' %}">
-                <i class="bi bi-mortarboard-fill me-2"></i>
-                Smart Start Academy
+
+            <!-- Brand -->
+            <a class="navbar-brand d-flex align-items-center" href="/">
+                <span class="brand-icon me-2"><i class="bi bi-mortarboard-fill"></i></span>
+                <span>Smart Start Academy</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
+
+            <!-- Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+
+                <ul class="navbar-nav mx-auto gap-lg-2">
+
+                    {% if not user.is_authenticated %}
+                    <!-- UNAUTHENTICATED MENU -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'about' %}">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'info' %}">Info</a>
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">Overview</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#features">Features</a>
+                    </li>
 
-                <div class="d-flex">
-                    {% if request.user.is_authenticated %}
-                    <a class="btn btn-outline-primary me-2" href="{% url 'profile' %}">Profile</a>
-                    <a class="btn btn-outline-danger" href="{% url 'logout' %}">Logout</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#pricing">Pricing</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#about">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#contact">Contact</a>
+                    </li>
+
                     {% else %}
-                    <a class="btn btn-outline-success me-2" href="{% url 'register' %}">Register</a>
-                    <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+                    <!-- AUTHENTICATED MENU -->
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/school-page/' %}active{% endif %}" href="{% url 'school_page' %}">
+                       Dashboard
+                    </a>
+                    </li>
+
+                    <!-- Students -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Students</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'all_student' %}">All Students</a></li>
+                            <li><a class="dropdown-item" href="{% url 'add_student' %}">Add Student</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Subjects -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Subjects</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'all_subject' %}">All Subjects</a></li>
+                            <li><a class="dropdown-item" href="{% url 'add_subject' %}">Add Subject</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Standards -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Standards</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'all_std' %}">All Standards</a></li>
+                            <li><a class="dropdown-item" href="{% url 'add_std' %}">Add Standard</a></li>
+                        </ul>
+                    </li>
                     {% endif %}
+                </ul>
+
+                <!-- RIGHT SIDE -->
+                <div class="d-flex align-items-center gap-3">
+
+                    {% if user.is_authenticated %}
+
+                    <!-- PROFILE DROPDOWN -->
+                    <div class="dropdown profile-dropdown">
+                        <button class="btn btn-outline-soft btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle"></i> {{ request.user.school }}
+                    </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'profile' %}">
+                                    <i class="bi bi-person"></i> Profile
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="{% url 'logout' %}">
+                                    <i class="bi bi-box-arrow-right"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {% else %}
+
+                    <a href="{% url 'login' %}" class="btn btn-outline-soft btn-sm">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-primary btn-sm">Start Free Trial</a> {% endif %}
+
                 </div>
+
             </div>
+
         </div>
     </nav>
 
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <ul>
-            <li><h5 class="text-center mb-3">School Menu</h5></li>
-            <li><a href="{% url 'school_page' %}"><i class="bi bi-house-door me-2"></i>Dashboard</a></li>
-            <li><h6 class="mt-3 mb-2">Students</h6></li>
-            <li><a href="{% url 'all_student' %}"><i class="bi bi-people me-2"></i>All Students</a></li>
-            <li><a href="{% url 'add_student' %}"><i class="bi bi-person-plus me-2"></i>Add Student</a></li>
-            <li><h6 class="mt-3 mb-2">Teachers</h6></li>
-            <li><a href="{% url 'school_page' %}"><i class="bi bi-person-badge me-2"></i>All Teachers</a></li>
-            <li><a href="{% url 'add_student' %}"><i class="bi bi-person-plus-fill me-2"></i>Add Teacher</a></li>
-            <li><h6 class="mt-3 mb-2">Academics</h6></li>
-            <li><a href="{% url 'add_std' %}"><i class="bi bi-plus-circle me-2"></i>Add Standard</a></li>
-            <li><a href="{% url 'add_subject' %}"><i class="bi bi-book me-2"></i>Add Subject</a></li>
-            <li><a href="{% url 'all_subject' %}"><i class="bi bi-list-ul me-2"></i>All Subjects</a></li>
-        </ul>
-    </div>
+
+
+
     <!-- Main Content -->
-    <main class="flex-grow-1">
-        {% block body %}{% endblock %}
+    <main class="main-content">
+        {% block content %} {% endblock %}
     </main>
 
+    {% if request.user.is_authenticated %} {% else %}
+
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer mt-auto mt-2 pt-4">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
+            <div class="row gy-4">
+                <div class="col-lg-4">
                     <h5>Smart Start Academy</h5>
-                    <p>Transforming education through innovative digital solutions. Making school management efficient, eco-friendly, and future-ready.</p>
-                    <p class="mb-0"><em>"Save the Trees, Reduce Paperwork - Go Digital with Smart Start Academy!"</em></p>
+                    <p>Digital-first school & academy management platform for fast-growing institutions.</p>
+                    <p class="small mb-0">
+                        <em>"Save trees. Reduce paperwork. Run your academy from a single dashboard."</em>
+                    </p>
                 </div>
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <h5>Product</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'home' %}">Home</a></li>
-                        <li><a href="{% url 'about' %}">About</a></li>
-                        <li><a href="{% url 'info' %}">Features</a></li>
-                        <li><a href="{% url 'contact' %}">Support</a></li>
+
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h6>Product</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="/#features">Features</a></li>
+                        <li><a href="/#pricing">Pricing</a></li>
+                        <li><a href="/#demo">Live Demo</a></li>
+                        <li><a href="/#support">Support</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <h5>Company</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'about' %}">About Us</a></li>
-                        <li><a href="#careers">Careers</a></li>
-                        <li><a href="#blog">Blog</a></li>
-                        <li><a href="#press">Press</a></li>
+
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h6>Company</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="/#about">About</a></li>
+                        <li><a href="/#careers">Careers</a></li>
+                        <li><a href="/#blog">Blog</a></li>
+                        <li><a href="/#press">Press</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <h5>Support</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="{% url 'info' %}">Help Center</a></li>
-                        <li><a href="{% url 'contact' %}">Contact</a></li>
-                        <li><a href="#privacy">Privacy</a></li>
-                        <li><a href="#terms">Terms</a></li>
+
+                <div class="col-md-6 col-lg-2">
+                    <h6>Resources</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="/#help">Help Center</a></li>
+                        <li><a href="/#contact">Contact</a></li>
+                        <li><a href="/#privacy">Privacy</a></li>
+                        <li><a href="/#terms">Terms</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <h5>Connect</h5>
-                    <div class="d-flex">
-                        <a href="#" class="me-3"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="me-3"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="me-3"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-instagram"></i></a>
+
+                <div class="col-md-6 col-lg-2">
+                    <h6>Connect</h6>
+                    <div class="d-flex gap-3 social-links">
+                        <a href="/#"><i class="bi bi-facebook"></i></a>
+                        <a href="/#"><i class="bi bi-twitter-x"></i></a>
+                        <a href="/#"><i class="bi bi-linkedin"></i></a>
+                        <a href="/#"><i class="bi bi-instagram"></i></a>
                     </div>
                 </div>
             </div>
-            <hr class="my-4">
+
+            <hr class="footer-divider" />
+
             <div class="row">
                 <div class="col-12 text-center">
-                    <p class="mb-0">&copy; 2024 Smart Start Academy. All rights reserved.</p>
+                    <p class="small mb-0">
+                        &copy; {{ now|date:"Y" }} Smart Start Academy. All rights reserved.
+                    </p>
                 </div>
             </div>
         </div>
     </footer>
 
+    {% endif %}
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.getElementById('sidebarToggle').addEventListener('click', function() {
-            document.getElementById('sidebar').classList.toggle('show');
-        });
-    </script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="{% static 'script.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
 </body>
+
 </html>

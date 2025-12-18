@@ -48,8 +48,12 @@ def user_login(request):
             
             user = authenticate(email=email,password=password)
             if user is not None:
-                login(request,user)
-                return redirect("/")
+                if user.is_staff == True:
+                    messages.info(request,"you are admin you cannot login here!")
+                    return redirect("/login")                    
+                else:
+                    login(request,user)
+                    return redirect("/profile")
             else:
                 messages.error(request,"Email and Password is invalid")
                 return redirect("/login")
@@ -107,34 +111,50 @@ def school_page(request):
 
 @login_required
 def add_student(request):    
+    print(request)
     if request.user.role != "SCHOOL":
         print(request.user.role)
         messages.error(request, "You are not allowed to add students.")
         return redirect("/")
     
     if request.method == "POST":
+        print(request.POST)
         form = AddStudentForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get("email")
             first_name = form.cleaned_data.get("first_name")
             last_name = form.cleaned_data.get("last_name")
             
-            user = CustomUser.objects.create(email=email,first_name=first_name,last_name=last_name,role="STUDENT")
-            user.set_unusable_password()
-            user.save()
-            
-            student = form.save(commit=False)
-            student.user = user
-            student.school = request.user.school
-            student.save()
-            
-            messages.success(request,f"{first_name} added successfully")
-            return redirect("/add-student")
+            if CustomUser.objects.filter(email=email).exists():
+                form.add_error("email","Email already exist")
+                
+            else:
+                user = CustomUser.objects.create(email=email,first_name=first_name,last_name=last_name,role="STUDENT")
+                
+                user.set_unusable_password()
+                user.save()
+                
+                student = form.save(commit=False)
+                student.user = user
+                student.school = request.user.school
+                student.save()
+                
+                messages.success(request,f"{first_name} added successfully")
+                return redirect("/all-student")
     else:
         form = AddStudentForm()
-            
-    return render(request,"add_student.html",{"form":form})
-    
+        
+    context = {
+        "form": form,
+        "form_title": "Add New Student",
+        "form_icon": "bi bi-person-plus-fill",
+        "submit_text": "Add Student",
+        "submit_icon": "bi bi-person-plus",
+        "date_fields": ["dob", "admission_date"],
+    }
+    return render(request,"add_universal_form.html",context)
+
+@login_required    
 def all_student(request):
     students = Student.objects.filter(school=request.user.school).order_by("gr_no")
     print(students)
@@ -153,7 +173,15 @@ def add_std(request):
             return redirect("/all-std")
     else:
         form = AddStdForm()
-    return render(request,"add_std.html",{"form":form})
+    context = {
+        "form": form,
+        "form_title": "Add New STD",
+        "form_icon": "bi bi-person-plus-fill",
+        "submit_text": "Add STD",
+        "submit_icon": "bi bi-person-plus",
+        "date_fields": ["dob", "admission_date"],
+    }
+    return render(request,"add_universal_form.html",context)
 
 @login_required    
 def all_std(request):
@@ -172,8 +200,17 @@ def add_subject(request):
             subject.save()
             return redirect("/all-subject")
     else:
-        form = AddSubjectForm()            
-    return render(request,"add_subject.html",{"form":form})
+        form = AddSubjectForm()     
+               
+    context = {
+        "form": form,
+        "form_title": "Add Subject",
+        "form_icon": "bi bi-person-plus-fill",
+        "submit_text": "Add STD",
+        "submit_icon": "bi bi-person-plus",
+        "date_fields": ["dob", "admission_date"],
+    }
+    return render(request,"add_universal_form.html",context)
             
 
 @login_required    
