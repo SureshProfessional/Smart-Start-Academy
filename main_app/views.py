@@ -24,8 +24,7 @@ def info(request):
 
 @logout_required
 def register(request):
-    if request.method == "POST":
-        print(request.POST)
+    if request.method == "POST":        
         form = SchoolRegisterForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
@@ -110,15 +109,12 @@ def school_page(request):
 
 
 @login_required
-def add_student(request):    
-    print(request)
-    if request.user.role != "SCHOOL":
-        print(request.user.role)
+def add_student(request):        
+    if request.user.role != "SCHOOL":        
         messages.error(request, "You are not allowed to add students.")
         return redirect("/")
     
-    if request.method == "POST":
-        print(request.POST)
+    if request.method == "POST":        
         form = AddStudentForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get("email")
@@ -156,8 +152,7 @@ def add_student(request):
 
 @login_required    
 def all_student(request):
-    students = Student.objects.filter(school=request.user.school).order_by("gr_no")
-    print(students)
+    students = Student.objects.filter(school=request.user.school).order_by("gr_no")    
     return render(request,"all_student.html",{"students":students})
     
 @login_required    
@@ -185,8 +180,7 @@ def add_std(request):
 
 @login_required    
 def all_std(request):
-    std = Std.objects.filter(school=request.user.school).order_by("std")
-    print(std)
+    std = Std.objects.filter(school=request.user.school).order_by("std")    
     return render(request,"all_std.html",{"stds":std})
 
 @login_required
