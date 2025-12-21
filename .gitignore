@@ -131,3 +131,6 @@ media/
 
 # Secrets
 secrets.json
+
+__pycache__/
+migrations/
