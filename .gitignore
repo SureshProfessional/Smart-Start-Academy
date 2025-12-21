@@ -132,15 +132,10 @@ media/
 # Secrets
 secrets.json
 
-# Python
+# Python cache
 __pycache__/
 *.pyc
 
-# Django
-db.sqlite3
-.env
-
-# Migrations
+# Django migrations (FULLY REMOVE)
 **/migrations/
-!**/migrations/__init__.py
 
