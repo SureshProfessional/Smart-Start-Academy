@@ -2,94 +2,23 @@ from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib import messages
 from .models import *
 from .forms import *
-from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-
 from .decorator import logout_required
 
 @logout_required
 def home(request):
-    return render(request,"index.html")
+    return render(request,"main_file/index.html")
 
 @logout_required
 def about(request):
-    return render(request,"about.html")
+    return render(request,"main_file/about.html")
 
 @logout_required
 def contact(request):
-    return render(request,"contact.html")
+    return render(request,"main_file/contact.html")
 
 def info(request):
-    return render(request,"info.html")
-
-@logout_required
-def register(request):
-    if request.method == "POST":        
-        form = SchoolRegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.role = "SCHOOL"
-            user.save()
-            School.objects.create(user=user)
-            messages.success(request,"School created successfully!")
-            return redirect("/login")
-    else:
-        form =  SchoolRegisterForm()
-    return render(request,"register.html",{"form":form})
-
-@logout_required
-def user_login(request):
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data.get("email")
-            password = form.cleaned_data.get("password")
-            
-            user = authenticate(email=email,password=password)
-            if user is not None:
-                if user.is_staff == True:
-                    messages.info(request,"you are admin you cannot login here!")
-                    return redirect("/login")                    
-                else:
-                    login(request,user)
-                    return redirect("/profile")
-            else:
-                messages.error(request,"Email and Password is invalid")
-                return redirect("/login")
-                
-    else:
-        form = LoginForm()
-    return render(request,"login.html",{"form":form})
-
-@login_required
-def user_logout(request):
-    logout(request)
-    return redirect("/")    
-
-@login_required
-def profile(request):    
-    user = request.user
-    school = getattr(user,"school",None)
-    
-    if request.method == "POST":
-        user_form = Profile(request.POST,request.FILES,instance=user)
-        school_form = SchoolProfile(request.POST,request.POST,instance=school)
-        
-        if user_form.is_valid() and school_form.is_valid():
-            user_form.save()
-            if user.role == "SCHOOL":
-                school_form.save()
-                messages.success(request,"Profile updated successfully")
-                return redirect("/profile")
-        
-    else:
-        user_form = Profile(instance=request.user)
-        school_form = SchoolProfile(instance=school)
-        
-    return render(request,"profile.html",{
-        "user_form":user_form,
-        "school_form":school_form,
-    })
+    return render(request,"main_file/info.html")
 
 @login_required
 def school_page(request):
@@ -105,56 +34,8 @@ def school_page(request):
         "all_subject":all_subject,
         "all_std":all_std,
     }
-    return render(request,"school_page.html",context)
+    return render(request,"school/school_page.html",context)
 
-
-@login_required
-def add_student(request):        
-    if request.user.role != "SCHOOL":        
-        messages.error(request, "You are not allowed to add students.")
-        return redirect("/")
-    
-    if request.method == "POST":        
-        form = AddStudentForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data.get("email")
-            first_name = form.cleaned_data.get("first_name")
-            last_name = form.cleaned_data.get("last_name")
-            
-            if CustomUser.objects.filter(email=email).exists():
-                form.add_error("email","Email already exist")
-                
-            else:
-                user = CustomUser.objects.create(email=email,first_name=first_name,last_name=last_name,role="STUDENT")
-                
-                user.set_unusable_password()
-                user.save()
-                
-                student = form.save(commit=False)
-                student.user = user
-                student.school = request.user.school
-                student.save()
-                
-                messages.success(request,f"{first_name} added successfully")
-                return redirect("/all-student")
-    else:
-        form = AddStudentForm()
-        
-    context = {
-        "form": form,
-        "form_title": "Add New Student",
-        "form_icon": "bi bi-person-plus-fill",
-        "submit_text": "Add Student",
-        "submit_icon": "bi bi-person-plus",
-        "date_fields": ["dob", "admission_date"],
-    }
-    return render(request,"add_universal_form.html",context)
-
-@login_required    
-def all_student(request):
-    students = Student.objects.filter(school=request.user.school).order_by("gr_no")    
-    return render(request,"all_student.html",{"students":students})
-    
 @login_required    
 def add_std(request):
     school = get_object_or_404(School,user=request.user)
@@ -181,7 +62,15 @@ def add_std(request):
 @login_required    
 def all_std(request):
     std = Std.objects.filter(school=request.user.school).order_by("std")    
-    return render(request,"all_std.html",{"stds":std})
+    return render(request,"school/all_std.html",{"stds":std})
+
+@login_required
+def delete_std(request,id):
+    if request.method == "POST":
+        std = get_object_or_404(Std,id=id)
+        std.delete()
+        return redirect("all_std")
+    return redirect("all_std")
 
 @login_required
 def add_subject(request):
@@ -210,4 +99,5 @@ def add_subject(request):
 @login_required    
 def all_subject(request):
     subjects = Subject.objects.filter(school=request.user.school)    
-    return render(request,"all_subject.html",{"subjects":subjects})
+    return render(request,"school/all_subject.html",{"subjects":subjects})
+

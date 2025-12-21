@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     
     'rest_framework',
     'main_app',
+    'auth_app',
+    'student_app',
+    'teacher_app',
     
     'widget_tweaks',
 ]
@@ -131,8 +134,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-AUTH_USER_MODEL = "main_app.CustomUser"
+AUTH_USER_MODEL = "auth_app.CustomUser"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

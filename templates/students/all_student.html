@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}All Students - Smart Start Academy{% endblock %}
+{% block content %}
+
+<style>
+</style>
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="table-heading"><i class="bi bi-people"></i> All Students</h2>
+
+        <a href="{% url 'add_student' %}" class="btn btn-primary">
+            <i class="bi bi-plus"></i> Add New Student
+        </a>
+    </div>
+
+    <div class="table-box">
+
+        <table id="studentsTable" class="display universal-table">
+{% include 'messages.html' %}            
+
+
+<thead>
+    <tr class="main-header">
+        <th>GR NO</th>
+        <th>Std</th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr class="filters">
+        <th><input type="text" placeholder="Search GR"></th>
+        <th><input type="text" placeholder="Search Std"></th>
+        <th><input type="text" placeholder="Search First"></th>
+        <th><input type="text" placeholder="Search Last"></th>
+        <th><input type="text" placeholder="Search Email"></th>
+        <th></th>
+    </tr>
+</thead>
+
+<tbody>
+{% for student in students %}
+<tr>
+    <td>{{ student.gr_no }}</td>
+    <td><span class="badge-soft">{{ student.std }}</span></td>
+    <td>{{ student.user.first_name }}</td>
+    <td>{{ student.user.last_name }}</td>
+    <td>{{ student.user.email }}</td>
+    <td>
+        <div class="action-buttons">
+            <button class="action-btn action-view"><i class="bi bi-eye"></i></button>
+            <button class="action-btn action-edit"><i class="bi bi-pencil"></i></button>
+            <form method="post" action="{% url 'delete_student' student.id %}">
+                {% csrf_token %}
+                <button class="action-btn action-delete" onclick="return confirm('Are you sure you want to delete {{ student.user.first_name }}')" type="submit"> <i class="bi bi-trash"></i></button>
+            </form>
+        </div>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+
+
+    </div>
+
+</div>
+
+
+{% block extra_js %}
+<script>
+$(document).ready(function () {
+
+    // Prevent re-init
+    if ($.fn.DataTable.isDataTable('#studentsTable')) {
+        $('#studentsTable').DataTable().destroy();
+    }
+
+    var table = $('#studentsTable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            { extend:'copy',  text:'<i class="bi bi-clipboard"></i> Copy' },
+            { extend:'excel', text:'<i class="bi bi-file-earmark-excel"></i> Excel' },
+            { extend:'csv',   text:'<i class="bi bi-filetype-csv"></i> CSV' },
+            { extend:'pdf',   text:'<i class="bi bi-filetype-pdf"></i> PDF' },
+            { extend:'print', text:'<i class="bi bi-printer"></i> Print' }
+        ],
+        orderCellsTop: true,
+        fixedHeader: true,
+        pageLength: 50
+    });
+
+    // ⭐ Column filters
+    $('#studentsTable thead tr.filters input').on('keyup change', function () {
+        let index = $(this).parent().index();
+        table.column(index).search(this.value).draw();
+    });
+
+});
+
+</script>
+{% endblock %}
+
+{% endblock %}
